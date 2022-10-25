@@ -19,8 +19,9 @@ const CartItems = ({ data, setFlag, flag }) => {
    };
 
    const updateQty = (action, itemId) => {
-      if (action == "add") {
+      if (action === "add") {
          setQty(qty + 1);
+         // eslint-disable-next-line array-callback-return
          cartItems.map((item) => {
             if (item.id === itemId) {
                item.qty += 1;
@@ -30,12 +31,13 @@ const CartItems = ({ data, setFlag, flag }) => {
          cartDispatch();
       } else {
          // initial state value is one so you need to check if 1 then remove it
-         if (qty == 1) {
+         if (qty === 1) {
             items = cartItems.filter((item) => item.id !== itemId);
             setFlag(flag + 1);
             cartDispatch();
          } else {
             setQty(qty - 1);
+            // eslint-disable-next-line array-callback-return
             cartItems.map((item) => {
                if (item.id === itemId) {
                   item.qty -= 1;
@@ -49,6 +51,7 @@ const CartItems = ({ data, setFlag, flag }) => {
 
    useEffect(() => {
       items = cartItems;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [qty, items]);
    return (
       <div
